@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>Space Invaders</header>
+      <div class="game-wrapper">
+        <div class="main">
+          <div class="game-top">
+            <div class="score">
+              <div class="score-txt">Score:</div>
+              <span id="score-num">0</span>
+            </div>
+            <div class="highScore" >
+              <div class="highestScore-txt">Highest Score :</div>
+              <span class="highestScore" id="highestScore"></span>
+            </div>
+            <div class="lives">
+              <div class="lives-txt">Lives:</div>
+              <span id="lives-cnt">3</span>
+            </div>
+          </div>
+        </div>
+        <div class="lose">
+          <h1>GAME OVER</h1>
+          <button class="btn" onclick="window.location.reload()">
+            Restart
+          </button>
+        </div>
+        <div class="win">
+          <h1>YOU WIN!</h1>
+          <button class="btn" onclick="window.location.reload()">
+            Restart
+          </button>
+        </div>
+      </div>
+      <script src="index.js"></script>
+      <footer></footer>
+    </div>
+  </body>
+</html>
