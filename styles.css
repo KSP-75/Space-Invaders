@@ -23,9 +23,9 @@ body {
   .main {
     width: 50rem;
     height: 40rem;
+    padding: 0.25rem;
     /* width: 51vw;
     height: 90vh; */
-    padding: 0.25rem;
     /* background-color: black; */
     background: url("./assests/space.jpg");
     position: relative;
@@ -36,9 +36,18 @@ body {
     text-align: center;
     background: black;
     color: #fff;
-    padding: 0.75rem;
+    padding: 0.15rem;
   }
   
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  .blink {
+    animation: blink 0.3s infinite; 
+  }
   
   .wrap {
     display: flex;

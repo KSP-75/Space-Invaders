@@ -26,7 +26,7 @@ const STATE = {
   lasers: [],
   enemyLasers: [],
   enemies: [],
-  spaceship_width: 2.5,
+  spaceship_width: 2.4,
   enemy_width: 2.9,
   cooldown: 0,
   number_of_enemies: 32,
@@ -38,9 +38,21 @@ const STATE = {
 
   lastMoveDownTime: null,
   moveDownInterval: 6000, 
-  moveDownAmount: 2.5, 
+  moveDownAmount: 2.8, 
   enemies_y : 0,
 };
+
+
+function makeDefenderBlink(){
+  const defender = document.querySelector('.player');
+
+  if(defender){
+    defender.classList.add('blink');
+    setTimeout(() => {
+      defender.classList.remove('blink');
+    }, 3000);
+  }
+}
 
 // Delete Laser
 function deleteLaser(lasers, laser, $laser) {
@@ -86,14 +98,14 @@ function moveEnemiesDown() {
     const enemy = enemies[i];
     enemy.y += STATE.moveDownAmount; 
     setPosition(enemy.$enemy, enemy.x, enemy.y);
-    if( enemy.y >= GAME_HEIGHT-5) STATE.gameOver = true;
+    if( enemy.y >= GAME_HEIGHT-4.5) STATE.gameOver = true;
   }
 
   STATE.lastMoveDownTime = setTimeout(moveEnemiesDown, STATE.moveDownInterval);
 }
 
 function updateEnemies($container) {
-  const dx = Math.sin(Date.now() / 500) * 2.5;
+  const dx = Math.sin(Date.now() / 500) * 2.3;
 
   const enemies = STATE.enemies;
   for (let i = 0; i < enemies.length; i++) {
@@ -139,6 +151,7 @@ function updateEnemyLaser() {
       lives.textContent = STATE.lives;
       deleteLaser(enemyLasers, enemyLaser, enemyLaser.$enemyLaser);
       STATE.score -=20;
+      makeDefenderBlink();
     if(STATE.score < 0) STATE.score = 0;
       score.textContent = STATE.score;
       if (STATE.lives === 0) STATE.gameOver = true;
@@ -316,7 +329,7 @@ function main() {
 
 function createEnemies($container ,y) {
   for (let i = 0; i <= STATE.number_of_enemies / 4; i++) {
-    createEnemy($container, i * 5, y);
+    createEnemy($container, i * 5.25, y);
   }
 }
 
