@@ -21,8 +21,11 @@ body {
   }
   
   .main {
-    width: 800px;
-    height: 650px;
+    width: 50rem;
+    height: 40rem;
+    /* width: 51vw;
+    height: 90vh; */
+    padding: 0.25rem;
     /* background-color: black; */
     background: url("./assests/space.jpg");
     position: relative;
@@ -33,7 +36,7 @@ body {
     text-align: center;
     background: black;
     color: #fff;
-    padding: 10px;
+    padding: 0.75rem;
   }
   
   
@@ -43,29 +46,29 @@ body {
     height: 100%;
   }
   
-  .main .laser {
+  .laser {
     position: absolute;
-    height: 30px;
+    height: 2rem;
     z-index: -1;
   }
   
-  .main .enemyLaser {
+  .enemyLaser {
     position: absolute;
-    height: 23px;
+    height: 1.45rem;
     z-index: -1;
   }
   
-  .main .enemy{
+  .enemy{
     position: absolute;
   }
 
   
-   .lose {
+   .gameEnd {
     display: none;
     position: absolute;
     background: #6b1818;
     color: white;
-    padding: 20px 50px;
+    padding: 1rem 3.5rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     text-align: center;
@@ -96,6 +99,10 @@ body {
     gap: 0.5rem;
   }
   .lives{
+    display: flex;
+    gap: 0.5rem;
+  }
+  .level{
     display: flex;
     gap: 0.5rem;
   }
