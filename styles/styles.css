@@ -27,7 +27,7 @@ body {
     /* width: 51vw;
     height: 90vh; */
     /* background-color: black; */
-    background: url("./assests/space.jpg");
+    background: url("../assets/space.jpg");
     position: relative;
     z-index: -2;
   }

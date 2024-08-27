@@ -82,7 +82,7 @@ function collideRect(rect1, rect2) {
 
 function createEnemy($container, x, y) {
   const $enemy = document.createElement("img");
-  $enemy.src = "assests/alien.png";
+  $enemy.src = "assets/alien.png";
   $enemy.className = "enemy";
   $container.appendChild($enemy);
   const enemy_cooldown = Math.floor(Math.random() * 250);
@@ -127,7 +127,7 @@ function updateEnemies($container) {
 
 function createEnemyLaser($container, x, y) {
   const $enemyLaser = document.createElement("img");
-  $enemyLaser.src = "assests/enemyLaser.png";
+  $enemyLaser.src = "assets/enemyLaser.png";
   $enemyLaser.className = "enemyLaser";
   $container.appendChild($enemyLaser);
   const enemyLaser = { x, y, $enemyLaser };
@@ -188,7 +188,7 @@ function createPlayer($container) {
   STATE.y_pos = GAME_HEIGHT;
   console.log(STATE.y_pos)
   const $player = document.createElement("img");
-  $player.src = "assests/defender.png";
+  $player.src = "assets/defender.png";
   $player.className = "player";
   $container.appendChild($player);
   setPosition($player, STATE.x_pos, STATE.y_pos);
@@ -229,7 +229,7 @@ function updateHighScore(){
 
 function createLaser($container, x, y) {
   const $laser = document.createElement("img");
-  $laser.src = "assests/laser.png";
+  $laser.src = "assets/laser.png";
   $laser.className = "laser";
   $container.appendChild($laser);
   const laser = { x, y, $laser };
