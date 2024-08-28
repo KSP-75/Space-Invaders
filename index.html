@@ -11,13 +11,13 @@
     <div class="wrap">
       <header>Space Invaders</header>
       <div class="game-wrapper">
-        <div class="main">
+        <div class="main hideDisplay">
           <div class="game-top">
             <div class="score">
               <div class="score-txt">Score:</div>
               <span id="score-num">0</span>
             </div>
-            <div class="highScore" >
+            <div class="highScore">
               <div class="highestScore-txt">Highest Score :</div>
               <span class="highestScore" id="highestScore"></span>
             </div>
@@ -31,21 +31,53 @@
             </div>
           </div>
         </div>
-        <div class="gameEnd">
-          <h1>GAME OVER</h1>
-          <button class="btn" onclick="window.location.reload()">
-            Restart
-          </button>
-        </div>
-        <div class="win">
-          <h1>YOU WIN!</h1>
-          <button class="btn" onclick="window.location.reload()">
-            Restart
-          </button>
+        <div class="gameEnd-container">
+
+          <div class="gameEnd">
+            <h1>GAME OVER</h1>
+            <div class="scoreCurrent">
+              <div class="currentScore-txt">Score :</div>
+              <span class="currentScore"></span>
+            </div>
+            <div class="scoreHighest">
+              <div class="HighestScore-txt">Highest Score :</div>
+              <span class="HighestScore"></span>
+            </div>
+            <button class="btn" onclick="window.location.reload()">
+              Restart
+            </button>
+          </div>
+          <div class="win">
+            <h1>YOU WIN!</h1>
+            <button class="btn" onclick="window.location.reload()">
+              Restart
+            </button>
+          </div>
+          <div class="leaderBoard-container">
+            <div class="leaderBoard-heading">
+            </div>
+            <div class="leaderBoard">
+              <table id="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>High Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-      <script src="./scripts/index.js"></script>
+        <div class="userEntry">
+          <label for="userName">Enter Player Name </label>
+          <input type="text" class="userName" id="userName" required />
+          <button class="play" onclick="handlePlay()">Play</button>
+        </div>
+        <script src="./scripts/index.js"></script>
       <footer></footer>
     </div>
   </body>
-</html>
+  </html>
