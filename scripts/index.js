@@ -1,10 +1,9 @@
-
 // Key codes for controls
 const KEY_RIGHT = 39;
 const KEY_LEFT = 37;
 const KEY_SPACE = 32;
 
-// Game dimensions I have taken them in rem 
+// Game dimensions I have taken them in rem
 const GAME_WIDTH = 50;
 const GAME_HEIGHT = 35;
 
@@ -51,7 +50,7 @@ const STATE = {
   enemies_y: 0, // Initial y position for enemies
 };
 
-// Function to make the defender(olayer) blink 
+// Function to make the defender(olayer) blink
 function makeDefenderBlink() {
   const defender = document.querySelector(".player");
 
@@ -333,10 +332,10 @@ function main(playerName) {
     }
     level.textContent = STATE.level; // Update level display
     let maxLevel = STATE.level;
-    if(maxLevel === 6){
-      maxLevel-=1;
-      STATE.lives +=1; // Award extra life at level 6
-      lives.textContent = STATE.lives
+    if (maxLevel === 6) {
+      maxLevel -= 1;
+      STATE.lives += 1; // Award extra life at level 6
+      lives.textContent = STATE.lives;
     }
     for (let i = 0; i < maxLevel; i++) {
       createEnemies($container, STATE.enemies_y); // Create new enemies
@@ -353,7 +352,7 @@ function main(playerName) {
 
   // main(playerName);
   setTimeout(() => {
-    main(playerName)
+    main(playerName);
   }, 6.8);
   // window.requestAnimationFrame(() => main(playerName)); // Request next frame
 }
@@ -371,7 +370,7 @@ window.addEventListener("keyup", KeyRelease);
 
 // Function to start the game
 function gameBegin(playerName) {
-  $container.classList.remove('hideDisplay'); // Show game container
+  $container.classList.remove("hideDisplay"); // Show game container
   createPlayer($container); // Create player character
   createEnemies($container, STATE.enemies_y); // Create initial enemies
   moveEnemiesDown(); // Start moving enemies down
@@ -390,7 +389,7 @@ function gameEnd(result, playerName) {
 function userEntry() {
   document.querySelector(".leaderBoard-container").classList.add("hideDisplay");
   $lose.classList.add("hideDisplay");
-  $win.classList.add("hideDisplay");  
+  $win.classList.add("hideDisplay");
 }
 // Initial call to hide leaderboard and result screens
 userEntry();
@@ -399,26 +398,25 @@ userEntry();
 function handlePlay() {
   const playerName = document.getElementById("userName").value;
   console.log(playerName);
-  document.querySelector(".userEntry").style.display = "none"; 
   if (playerName) {
+    document.querySelector(".userEntry").style.display = "none";
     gameBegin(playerName); // Start the game with the entered player name
   } else {
-    alert("Please enter Player Name "); // send alert if player name not entered
-    window.location.reload(); // Reload the page if no name is entered
+    document.getElementById("error-message").textContent =
+      "Please enter the name first!";
   }
 }
-
 
 // Function to save the player's score to the leaderboard
 function saveScore(playerName) {
   console.log(playerName);
   const Score = STATE.score;
-  const scores = JSON.parse(localStorage.getItem('leaderboard')) || [];
-  
-  const playerIndex = scores.findIndex(entry => entry.name === playerName);
+  const scores = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+  const playerIndex = scores.findIndex((entry) => entry.name === playerName);
   const highestScore = document.querySelector(".HighestScore");
   const currentScore = document.querySelector(".currentScore");
-  
+
   if (playerIndex > -1) {
     if (Score > scores[playerIndex].score) {
       scores[playerIndex].score = Score; // Update score if higher
@@ -430,39 +428,40 @@ function saveScore(playerName) {
     currentScore.textContent = Score;
     highestScore.textContent = Score;
   }
-  
+
   scores.sort((a, b) => b.score - a.score); // Sort scores in descending order
   if (scores.length > 7) {
     scores.length = 7; // Limit leaderboard to top 10 scores
   }
-  
-  localStorage.setItem('leaderboard', JSON.stringify(scores)); // Save leaderboard to localStorage
+
+  localStorage.setItem("leaderboard", JSON.stringify(scores)); // Save leaderboard to localStorage
 }
 
 // Function to get the leaderboard from localStorage
 function getLeaderBoard() {
-  console.log(JSON.parse(localStorage.getItem('leaderboard')));
-  return JSON.parse(localStorage.getItem('leaderboard')) || [];
+  console.log(JSON.parse(localStorage.getItem("leaderboard")));
+  return JSON.parse(localStorage.getItem("leaderboard")) || [];
 }
 
 // Function to display the leaderboard on the screen
 function displayLeaderBoard() {
   const leaderBoard = getLeaderBoard();
-  const tableBody = document.querySelector('#table tbody');
+  const tableBody = document.querySelector("#table tbody");
 
-  tableBody.innerHTML = ''; // Clear existing table rows
+  tableBody.innerHTML = ""; // Clear existing table rows
 
-  leaderBoard.forEach(entry => {
-    const row = document.createElement('tr');
-    const nameData = document.createElement('td');
+  leaderBoard.forEach((entry) => {
+    const row = document.createElement("tr");
+    const nameData = document.createElement("td");
     nameData.textContent = entry.name;
-    const scoreData = document.createElement('td');
+    const scoreData = document.createElement("td");
     scoreData.textContent = entry.score;
     row.appendChild(nameData);
     row.appendChild(scoreData);
     tableBody.appendChild(row);
   });
 
-
-  document.querySelector(".leaderBoard-container").classList.remove("hideDisplay"); // Show leaderboard container
+  document
+    .querySelector(".leaderBoard-container")
+    .classList.remove("hideDisplay"); // Show leaderboard container
 }
