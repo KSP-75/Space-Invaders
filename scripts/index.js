@@ -1,7 +1,5 @@
 
 // Key codes for controls
-const KEY_UP = 38;
-const KEY_DOWN = 40;
 const KEY_RIGHT = 39;
 const KEY_LEFT = 37;
 const KEY_SPACE = 32;
@@ -40,7 +38,7 @@ const STATE = {
   spaceship_width: 2.4, // Player spaceship width
   enemy_width: 2.9, // Enemy width
   cooldown: 0, // Cooldown for shooting
-  number_of_enemies: 32, // Total number of enemies
+  number_of_enemies: 8, // Total number of enemies
   enemy_cooldown: 0, // Cooldown for enemy shooting
   gameOver: false, // Game over flag
   score: 0, // Player's score
@@ -338,6 +336,7 @@ function main(playerName) {
     if(maxLevel === 6){
       maxLevel-=1;
       STATE.lives +=1; // Award extra life at level 6
+      lives.textContent = STATE.lives
     }
     for (let i = 0; i < maxLevel; i++) {
       createEnemies($container, STATE.enemies_y); // Create new enemies
@@ -352,12 +351,16 @@ function main(playerName) {
   updateLaser($container); // Update player lasers
   updateEnemyLaser($container); // Update enemy lasers
 
-  window.requestAnimationFrame(() => main(playerName)); // Request next frame
+  // main(playerName);
+  setTimeout(() => {
+    main(playerName)
+  }, 6.8);
+  // window.requestAnimationFrame(() => main(playerName)); // Request next frame
 }
 
 // Function to create a row of enemies
 function createEnemies($container, y) {
-  for (let i = 0; i <= STATE.number_of_enemies / 4; i++) {
+  for (let i = 0; i <= STATE.number_of_enemies; i++) {
     createEnemy($container, i * 5.25, y);
   }
 }
@@ -400,6 +403,7 @@ function handlePlay() {
   if (playerName) {
     gameBegin(playerName); // Start the game with the entered player name
   } else {
+    alert("Please enter Player Name "); // send alert if player name not entered
     window.location.reload(); // Reload the page if no name is entered
   }
 }
@@ -428,8 +432,8 @@ function saveScore(playerName) {
   }
   
   scores.sort((a, b) => b.score - a.score); // Sort scores in descending order
-  if (scores.length > 10) {
-    scores.length = 10; // Limit leaderboard to top 10 scores
+  if (scores.length > 7) {
+    scores.length = 7; // Limit leaderboard to top 10 scores
   }
   
   localStorage.setItem('leaderboard', JSON.stringify(scores)); // Save leaderboard to localStorage
@@ -450,14 +454,15 @@ function displayLeaderBoard() {
 
   leaderBoard.forEach(entry => {
     const row = document.createElement('tr');
-    const nameCell = document.createElement('td');
-    nameCell.textContent = entry.name;
-    const scoreCell = document.createElement('td');
-    scoreCell.textContent = entry.score;
-    row.appendChild(nameCell);
-    row.appendChild(scoreCell);
+    const nameData = document.createElement('td');
+    nameData.textContent = entry.name;
+    const scoreData = document.createElement('td');
+    scoreData.textContent = entry.score;
+    row.appendChild(nameData);
+    row.appendChild(scoreData);
     tableBody.appendChild(row);
   });
+
 
   document.querySelector(".leaderBoard-container").classList.remove("hideDisplay"); // Show leaderboard container
 }
