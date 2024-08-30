@@ -39,6 +39,7 @@ header {
   background: black;
   color: #fff;
   padding: 0.15rem;
+  /* z-index: -1; */
 }
 
 @keyframes blink {

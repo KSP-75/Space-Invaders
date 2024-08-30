@@ -112,6 +112,7 @@ function moveEnemiesDown() {
   }
 
   STATE.lastMoveDownTime = setTimeout(moveEnemiesDown, STATE.moveDownInterval); // Repeating untill game is over
+  console.log(STATE.lastMoveDownTime);
 }
 
 // Function to update enemies positions and handle enemy shooting
@@ -231,7 +232,7 @@ function updatePlayer() {
   const $player = document.querySelector(".player");
   setPosition($player, bound(STATE.x_pos), STATE.y_pos - 0.75);
   if (STATE.cooldown > 0) {
-    STATE.cooldown -= 0.8; // Decrease cooldown over time
+    STATE.cooldown -= 0.9; // Decrease cooldown over time
   }
 }
 
@@ -262,7 +263,7 @@ function updateLaser($container) {
   const lasers = STATE.lasers;
   for (let i = 0; i < lasers.length; i++) {
     const laser = lasers[i];
-    laser.y -= 0.35; // Move laser up
+    laser.y -= 0.36; // Move laser up
 
     if (laser.y < 2.7) {
       deleteLaser(lasers, laser, laser.$laser); // Remove laser if it goes off screen
@@ -331,11 +332,12 @@ function main(playerName) {
       return;
     }
     level.textContent = STATE.level; // Update level display
-    let maxLevel = STATE.level;
-    if (maxLevel === 6) {
+    let maxLevel = STATE.level; 
+    if (maxLevel === 6) {   
       maxLevel -= 1;
       STATE.lives += 1; // Award extra life at level 6
       lives.textContent = STATE.lives;
+      STATE.moveDownAmount += 0.2;
     }
     for (let i = 0; i < maxLevel; i++) {
       createEnemies($container, STATE.enemies_y); // Create new enemies
@@ -353,7 +355,7 @@ function main(playerName) {
   // main(playerName);
   setTimeout(() => {
     main(playerName);
-  }, 6.8);
+  }, 6);
   // window.requestAnimationFrame(() => main(playerName)); // Request next frame
 }
 
@@ -364,9 +366,6 @@ function createEnemies($container, y) {
   }
 }
 
-// Event listeners for key press and release
-window.addEventListener("keydown", KeyPress);
-window.addEventListener("keyup", KeyRelease);
 
 // Function to start the game
 function gameBegin(playerName) {
@@ -388,6 +387,7 @@ function gameEnd(result, playerName) {
 // Function to hide the leaderboard and result screens
 function userEntry() {
   document.querySelector(".leaderBoard-container").classList.add("hideDisplay");
+  // document.querySelector(".userEntry").classList.add("hideDisplay");
   $lose.classList.add("hideDisplay");
   $win.classList.add("hideDisplay");
 }
@@ -406,6 +406,7 @@ function handlePlay() {
       "Please enter the name first!";
   }
 }
+
 
 // Function to save the player's score to the leaderboard
 function saveScore(playerName) {
@@ -465,3 +466,7 @@ function displayLeaderBoard() {
     .querySelector(".leaderBoard-container")
     .classList.remove("hideDisplay"); // Show leaderboard container
 }
+
+// Event listeners for key press and release
+window.addEventListener("keydown", KeyPress);
+window.addEventListener("keyup", KeyRelease);
