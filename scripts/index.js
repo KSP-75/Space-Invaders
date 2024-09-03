@@ -48,15 +48,18 @@ const STATE = {
   moveDownInterval: 6000, // Interval time for moving enemies down
   moveDownAmount: 2.8, // Amount by which enemies move down
   enemies_y: 0, // Initial y position for enemies
+  blink: false,
 };
 
 // Function to make the defender(olayer) blink
 function makeDefenderBlink() {
   const defender = document.querySelector(".player");
+    STATE.blink = true;
 
   if (defender) {
     defender.classList.add("blink"); // Adding blinking class
     setTimeout(() => {
+      STATE.blink = false;
       defender.classList.remove("blink"); // Removing blinking class after 3 seconds
     }, 3000);
   }
@@ -159,7 +162,7 @@ function updateEnemyLaser() {
     const spaceship_rectangle = document
       .querySelector(".player")
       .getBoundingClientRect();
-    if (collideRect(spaceship_rectangle, enemyLaser_rectangle)) {
+    if (!STATE.blink && collideRect(spaceship_rectangle, enemyLaser_rectangle)) {
       STATE.lives -= 1; // Reduce lives on collision
       lives.textContent = STATE.lives;
       deleteLaser(enemyLasers, enemyLaser, enemyLaser.$enemyLaser);
@@ -337,7 +340,7 @@ function main(playerName) {
       maxLevel -= 1;
       STATE.lives += 1; // Award extra life at level 6
       lives.textContent = STATE.lives;
-      STATE.moveDownAmount += 0.2;
+      STATE.moveDownAmount += 0.05;
     }
     for (let i = 0; i < maxLevel; i++) {
       createEnemies($container, STATE.enemies_y); // Create new enemies
